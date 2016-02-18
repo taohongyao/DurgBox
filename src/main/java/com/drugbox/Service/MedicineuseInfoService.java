@@ -1,7 +1,7 @@
 package com.drugbox.Service;
 
 import com.drugbox.Bean.BeanBase;
-import com.drugbox.DAO.MedicineUseInfoDAO;
+import com.drugbox.DAO.MedicineuseInfoDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @RequestMapping("/medicine")
 public class MedicineuseInfoService {
     @Resource
-    MedicineUseInfoDAO dao;
+    MedicineuseInfoDAO dao;
     @RequestMapping(value="/medicineuserinfo.do",method= RequestMethod.GET)
     @ResponseBody
     public BeanBase getMedicineuserInfo(){

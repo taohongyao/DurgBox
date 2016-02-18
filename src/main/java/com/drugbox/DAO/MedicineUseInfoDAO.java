@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Transactional
 @Component
-public class MedicineUseInfoDAO {
+public class MedicineuseInfoDAO {
     @Autowired
     @Qualifier("sessionFactory")
     private SessionFactory sessionFactory;
