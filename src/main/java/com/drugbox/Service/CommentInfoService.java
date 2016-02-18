@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * Created by 44247 on 2016/2/17 0017.
  */
 @Controller
-@RequestMapping("/comment")
+@RequestMapping("/forum")
 public class CommentInfoService {
     @Resource
     CommentInfoDAO dao;

@@ -4,9 +4,13 @@ import com.drugbox.Entity.CommunicationInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -17,6 +21,8 @@ import java.util.List;
  */
 @Transactional
 @Component
+@RunWith(SpringJUnit4ClassRunner.class) // 整合
+@ContextConfiguration(locations="classpath:applicationContext.xml") // 加载配置
 public class CommunicationInfoDAO {
     @Autowired
     @Qualifier("sessionFactory")
@@ -51,5 +57,32 @@ public class CommunicationInfoDAO {
             query.setParameter(i, params);
         }
         return query.list();
+    }
+
+    public List<CommunicationInfo> getTitleList (int first,int capacity) {
+        Query query = this.getSession().createQuery("from CommunicationInfo ");
+        query.setFirstResult(first);
+        query.setMaxResults(capacity);
+        return query.list();
+    }
+    public long getAllCount () {
+        String hql = "select count(*) from CommunicationInfo ";
+        Query query = this.getSession().createQuery(hql);
+        return ((Long)query.uniqueResult()).intValue();
+    }
+    @Test
+    public void getTitleListTest () {
+//        Query query = this.getSession().createQuery("from CommunicationInfo ");
+//        query.setFirstResult(1);
+//        query.setMaxResults(5);
+//        List<CommunicationInfo> list=query.list();
+//        System.out.println(list.size());
+//        for(CommunicationInfo c:list){
+//            System.out.println(c.getCommunicateTopic());
+//        }
+
+        String hql = "select count(*) from CommunicationInfo";
+        Query query2 = this.getSession().createQuery(hql);
+        System.out.println(((Long)query2.uniqueResult()).intValue());
     }
 }
