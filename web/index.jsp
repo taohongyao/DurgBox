@@ -8,9 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title> DrugBox-API 1.0 </title>
   </head>
   <body>
-  $END$
+  <div align="center"> <h1>DrugBox-API 1.0</h1> </div>
+  <h2 align="center">RQcodeURL(二维码图片): http://drugbox.coding.io/medicineinfo/Medicine_QRcode/$medicineId$.jpg </h2>
+  <h2 align="center">MedicineInfoURL（获取药品信息）: http://drugbox.coding.io/MedicineInfo.do?id=$medicineId$ </h2>
+
   </body>
 </html>
