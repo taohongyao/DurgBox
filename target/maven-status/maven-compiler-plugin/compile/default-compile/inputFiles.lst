@@ -10,6 +10,7 @@ D:\study\project\DrugBox\src\main\java\com\drugbox\DAO\MedicineInfoDAO.java
 D:\study\project\DrugBox\src\main\java\com\drugbox\Entity\MedicineuseInfo.java
 D:\study\project\DrugBox\src\main\java\com\drugbox\Entity\MedicineInfo.java
 D:\study\project\DrugBox\src\main\java\com\drugbox\Service\MedicineinfoService.java
+D:\study\project\DrugBox\src\main\java\com\drugbox\Bean\CommunicationInfo\CommunicationBean.java
 D:\study\project\DrugBox\src\main\java\com\drugbox\Service\MedicineuseInfoService.java
 D:\study\project\DrugBox\src\main\java\com\drugbox\Service\CommentInfoService.java
 D:\study\project\DrugBox\src\main\java\com\drugbox\Service\User\UserPool.java
