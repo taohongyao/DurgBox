@@ -9,8 +9,8 @@
     <!-- 开启注解 -->
     <mvc:annotation-driven/>
     <!-- 静态资源(js/image)的访问 -->
-    <mvc:resources location="/RESOURCES/images/Medicine_QRcode/" mapping="/medicineinfo/Medicine_QRcode/**" />
-    <mvc:resources location="/RESOURCES/images/Medicine_Picture/" mapping="/medicineinfo/Medicine_Picture/**" />
+    <mvc:resources location="/RESOURCES/images/Medicine_QRcode/" mapping="/medicine/Medicine_QRcode/**" />
+    <mvc:resources location="/RESOURCES/images/Medicine_Picture/" mapping="/medicine/Medicine_Picture/**" />
     <!-- 定义视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
         <property value="/" name="prefix"/>
