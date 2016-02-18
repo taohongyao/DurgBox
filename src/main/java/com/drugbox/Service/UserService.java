@@ -28,8 +28,8 @@ public class UserService {
         System.out.println("here is bean MedicineInfoDAO : "+dao);
         System.out.println(dao.findById("H20133031"));
     }
-    @RequestMapping(name="/medicineinfo.do",method= RequestMethod.GET)
-    @ResponseBody
+//    @RequestMapping(name="/medicineinfo.do",method= RequestMethod.GET)
+//    @ResponseBody
     public MedicineInfo test1(@RequestParam("id") String id){
         MedicineInfo medicineInfo = dao.findById(id);
         return medicineInfo;
