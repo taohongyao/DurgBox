@@ -79,6 +79,8 @@ public class MedicineInfoDAO {
         for(MedicineInfo m:list1){
             System.out.println(m.getMedicineName());
         }
+
+
 //        String hql = "select count(*) from CommunicationInfo";
 //        Query query2 = this.getSession().createQuery(hql);
 //        System.out.println(((Long)query2.uniqueResult()).intValue());

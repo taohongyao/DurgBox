@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +26,14 @@ public class MedicineinfoService {
     MedicineInfoDAO dao;
     @RequestMapping(value="/medicineinfo.do",method= RequestMethod.GET)
     @ResponseBody
-    public BeanBase getMedicineInfo(@RequestParam("id") String id){
+    public BeanBase getMedicineInfo(@RequestParam("id") String id) throws UnsupportedEncodingException {
         BeanBase carrier =new BeanBase();
         MedicineInfo medicineInfo = dao.findById(id);
         carrier.setContents(medicineInfo);
         if (medicineInfo!=null){
             carrier.setInfo("N01","查询成功");
         }else {
-            carrier.setInfo("E01","查询失败");
+            carrier.setInfo("E01","查询失败"+new String(id.getBytes("UTF-8")));
         }
         return carrier;
     }
@@ -46,7 +47,7 @@ public class MedicineinfoService {
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");
         }else {
-            carrier.setInfo("E01","查询失败"+name);
+            carrier.setInfo("E01","查询失败");
         }
         return carrier;
     }
