@@ -66,6 +66,7 @@ public class MedicineInfoDAO {
 
     @Test
     public void getTitleListTest () {
+
         Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%太极%");
         List<MedicineInfo> list=query.list();
         System.out.println(list.size());

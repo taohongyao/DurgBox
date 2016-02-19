@@ -5,6 +5,7 @@ import com.drugbox.Bean.CommentInfo.CommentInfoBean;
 import com.drugbox.DAO.MedicineInfoDAO;
 import com.drugbox.Entity.CommentInfo;
 import com.drugbox.Entity.MedicineInfo;
+import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,29 +27,34 @@ public class MedicineinfoService {
     MedicineInfoDAO dao;
     @RequestMapping(value="/medicineinfo.do",method= RequestMethod.GET)
     @ResponseBody
-    public BeanBase getMedicineInfo(@RequestParam("id") String id) throws UnsupportedEncodingException {
+    public BeanBase getMedicineInfo(@RequestParam("id") String id)  {
         BeanBase carrier =new BeanBase();
         MedicineInfo medicineInfo = dao.findById(id);
         carrier.setContents(medicineInfo);
         if (medicineInfo!=null){
             carrier.setInfo("N01","查询成功");
         }else {
-            carrier.setInfo("E01","查询失败"+new String(id.getBytes("UTF-8")));
+            carrier.setInfo("E01","查询失败");
         }
         return carrier;
     }
 
     @RequestMapping(value="/findmedicinelist.do",method= RequestMethod.GET)
     @ResponseBody
-    public BeanBase findMedicineList(@RequestParam("name") String name){
+    public BeanBase findMedicineList(@RequestParam("name") String name)throws UnsupportedEncodingException{
         BeanBase carrier =new BeanBase();
         List<MedicineInfo> outlist = dao.findMedicineListByname(name);
         carrier.setContents(outlist);
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");
         }else {
-            carrier.setInfo("E01","查询失败");
+            carrier.setInfo("E01","查询失败"+new String(name.getBytes("UTF-8")));
         }
         return carrier;
+    }
+
+    @Test
+    public void test(){
+
     }
 }
