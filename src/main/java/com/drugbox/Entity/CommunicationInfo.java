@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 /**
  * Created by 44247 on 2016/2/17 0017.
@@ -15,7 +16,7 @@ public class CommunicationInfo {
     private String communitcateContent;
     private String pictureAttached;
     private Integer communicateZhuan;
-
+    private Timestamp  communicateTime;
     @Id
     @Column(name = "Communicate_ID")
     public int getCommunicateId() {
@@ -64,6 +65,16 @@ public class CommunicationInfo {
 
     public void setCommunicateZhuan(Integer communicateZhuan) {
         this.communicateZhuan = communicateZhuan;
+    }
+
+    @Basic
+    @Column(name = "Communicate_Time")
+    public Timestamp getCommunicateTime() {
+        return communicateTime;
+    }
+
+    public void setCommunicateTime(Timestamp communicateTime) {
+        this.communicateTime = communicateTime;
     }
 
     @Override

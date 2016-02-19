@@ -71,6 +71,7 @@ public class CommunicationInfoService {
             bean.setCommunicateTopic(c.getCommunicateTopic());
             bean.setCommunicateZhuan(c.getCommunicateZhuan());
             bean.setPictureAttached(c.getPictureAttached());
+            bean.setCommunicateTime(c.getCommunicateTime().toString());
             outlist.add(bean);
         }
         return outlist;

@@ -1,6 +1,7 @@
 package com.drugbox.Entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * Created by 44247 on 2016/2/17 0017.
@@ -12,6 +13,7 @@ public class CommentInfo {
     private Integer commentZan;
     private CommunicationInfo communicationInfo;
     private UserInfo userInfo;
+    private Timestamp commentTime;
     @Id
     @Column(name = "Comment_ID")
     public int getCommentId() {
@@ -61,6 +63,15 @@ public class CommentInfo {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+    @Basic
+    @Column(name = "Comment_Time")
+    public Timestamp getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Timestamp commentTime) {
+        this.commentTime = commentTime;
     }
 
     @Override

@@ -8,6 +8,7 @@ public class CommunicationBean {
     private String communicateTopic;
     private String pictureAttached;
     private Integer communicateZhuan;
+    private String communicateTime;
 
     public int getCommunicateId() {
         return communicateId;
@@ -39,5 +40,13 @@ public class CommunicationBean {
 
     public void setCommunicateZhuan(Integer communicateZhuan) {
         this.communicateZhuan = communicateZhuan;
+    }
+
+    public String getCommunicateTime() {
+        return communicateTime;
+    }
+
+    public void setCommunicateTime(String communicateTime) {
+        this.communicateTime = communicateTime;
     }
 }

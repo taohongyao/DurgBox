@@ -41,14 +41,14 @@ public class MedicineinfoService {
 
     @RequestMapping(value="/findmedicinelist.do",method= RequestMethod.GET)
     @ResponseBody
-    public BeanBase findMedicineList(@RequestParam("name") String name)throws UnsupportedEncodingException{
+    public BeanBase findMedicineList(@RequestParam("name") String name){
         BeanBase carrier =new BeanBase();
         List<MedicineInfo> outlist = dao.findMedicineListByname(name);
         carrier.setContents(outlist);
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");
         }else {
-            carrier.setInfo("E01","查询失败"+new String(name.getBytes("UTF-8")));
+            carrier.setInfo("E01","查询失败");
         }
         return carrier;
     }

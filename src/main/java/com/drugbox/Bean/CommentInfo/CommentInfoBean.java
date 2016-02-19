@@ -9,6 +9,7 @@ public class CommentInfoBean {
     private Integer commentZan;
     private String userName;
     private int communicationId;
+    private String commentTime;
 
     public int getCommentId() {
         return commentId;
@@ -48,5 +49,13 @@ public class CommentInfoBean {
 
     public void setCommunicationId(int communicationId) {
         this.communicationId = communicationId;
+    }
+
+    public String getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(String commentTime) {
+        this.commentTime = commentTime;
     }
 }
