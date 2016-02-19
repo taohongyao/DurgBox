@@ -1,5 +1,7 @@
 package com.drugbox.DAO;
 
+import com.drugbox.Entity.CommentInfo;
+import com.drugbox.Entity.CommunicationInfo;
 import com.drugbox.Entity.UserInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -52,5 +54,17 @@ public class CommentInfoDAO {
             query.setParameter(i, params);
         }
         return query.list();
+    }
+
+    public List<CommentInfo> getList (int communicationID,int first, int capacity) {
+        Query query = this.getSession().createQuery("from CommentInfo where communicationInfo ="+communicationID);
+        query.setFirstResult(first);
+        query.setMaxResults(capacity);
+        return query.list();
+    }
+    public long getAllCount (int communicationID) {
+        String hql = "select count(*) from CommentInfo where communicationInfo ="+communicationID;
+        Query query = this.getSession().createQuery(hql);
+        return ((Long)query.uniqueResult()).intValue();
     }
 }

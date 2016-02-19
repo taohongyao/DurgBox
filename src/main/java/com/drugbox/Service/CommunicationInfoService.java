@@ -36,7 +36,7 @@ public class CommunicationInfoService {
         }
         return carrier;
     }
-    @RequestMapping(value="/communicationTitleList.do",method= RequestMethod.GET)
+    @RequestMapping(value="/communicationtitlelist.do",method= RequestMethod.GET)
     @ResponseBody
     public BeanBase getCommunicationTitleList(@RequestParam("start") int start,
                                               @RequestParam("page") int page,
@@ -53,7 +53,7 @@ public class CommunicationInfoService {
         }
         return carrier;
     }
-    @RequestMapping(value="/communicationMaxCount.do",method= RequestMethod.GET)
+    @RequestMapping(value="/communicationmaxcount.do",method= RequestMethod.GET)
     @ResponseBody
     public BeanBase getCommunicationTitleList(){
         BeanBase carrier =new BeanBase();
