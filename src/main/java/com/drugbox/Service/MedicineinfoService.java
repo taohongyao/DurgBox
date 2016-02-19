@@ -46,7 +46,7 @@ public class MedicineinfoService {
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");
         }else {
-            carrier.setInfo("E01","查询失败");
+            carrier.setInfo("E01","查询失败"+name);
         }
         return carrier;
     }
