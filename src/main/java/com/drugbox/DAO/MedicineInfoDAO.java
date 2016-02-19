@@ -1,6 +1,7 @@
 package com.drugbox.DAO;
 
 import com.drugbox.Entity.MedicineInfo;
+import com.drugbox.Util.DataEncoder;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,7 +61,7 @@ public class MedicineInfoDAO {
         return query.list();
     }
     public List<MedicineInfo> findMedicineListByname (String name) {
-        Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%"+name+"%");
+        Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%"+ DataEncoder.encodeStr(name)+"%");
         return query.list();
     }
 
