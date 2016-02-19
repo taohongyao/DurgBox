@@ -6,7 +6,7 @@
     <!-- 设置数据库源 -->
     <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://115.29.34.145:3306/medical_box"></property>
+        <property name="url" value="jdbc:mysql://115.29.34.145:3306/medical_box?useunicode=true&amp;characterEncoding=utf8"></property>
         <property name="username" value="mbadmin"/>
         <property name="password" value="yphz123456"/>
         <!-- 数据库连接池保持的最小连接数 -->
