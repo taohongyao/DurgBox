@@ -54,9 +54,11 @@ public class CollectionInfoDAO {
         return query.list();
     }
 
-    public List<CollectionInfo> getList (String userName) {
+    public List<CollectionInfo> getList (String userName,int first,int capacity) {
         Query query = this.getSession().createQuery("from CollectionInfo where userInfo.userName = ?");
         query.setParameter(0,userName);
+        query.setFirstResult(first);
+        query.setMaxResults(capacity);
         return query.list();
     }
     public long getAllCount (String userName) {

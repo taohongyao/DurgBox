@@ -54,9 +54,11 @@ public class PurchaseInfoDAO {
         return query.list();
     }
 
-    public List<PurchaseInfo> getList (String userName) {
+    public List<PurchaseInfo> getList (String userName,int first,int capacity) {
         Query query = this.getSession().createQuery("from PurchaseInfo where userInfo.userName = ?");
         query.setParameter(0,userName);
+        query.setFirstResult(first);
+        query.setMaxResults(capacity);
         return query.list();
     }
     public long getAllCount (String userName) {
