@@ -54,7 +54,7 @@ public class CommunicationInfoService {
     }
     @RequestMapping(value="/communicationmaxcount.do",method= RequestMethod.GET)
     @ResponseBody
-    public OBeanBase getCommunicationTitleList(){
+    public OBeanBase getCommunicationMaxCount(){
         OBeanBase carrier =new OBeanBase();
         long count=dao.getAllCount();
         carrier.setContents(count);

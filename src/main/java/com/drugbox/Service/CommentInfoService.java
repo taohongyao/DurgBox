@@ -24,7 +24,7 @@ public class CommentInfoService {
 
     @RequestMapping(value = "/commentinfolist.do", method = RequestMethod.GET)
     @ResponseBody
-    public OBeanBase getCommunicationTitleList(@RequestParam("start") int start,
+    public OBeanBase getCommentList(@RequestParam("start") int start,
                                                @RequestParam("page") int page,
                                                @RequestParam("capacity") int capacity,
                                                @RequestParam("communicateid") int communicateID) {
@@ -43,7 +43,7 @@ public class CommentInfoService {
 
     @RequestMapping(value = "/commentinfomaxcount.do", method = RequestMethod.GET)
     @ResponseBody
-    public OBeanBase getCommunicationTitleList(@RequestParam("communicateid") int communicateID) {
+    public OBeanBase getCommentMaxCount(@RequestParam("communicateid") int communicateID) {
         OBeanBase carrier = new OBeanBase();
         long count = dao.getAllCount(communicateID);
         carrier.setContents(count);

@@ -1,8 +1,10 @@
 package com.drugbox.Service.User;
 
+import com.drugbox.Bean.IBeanOperation;
 import com.drugbox.Bean.UserInfo.UserPoolBean;
 import com.drugbox.Util.DataEncoder;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -10,9 +12,10 @@ import java.util.HashMap;
 /**
  * Created by 44247 on 2016/2/18 0018.
  */
+@Component
 public  class UserPool {
     private static HashMap<String,UserPoolBean> userpool=new HashMap<String,UserPoolBean>( );
-    public  static void addUser(String account){
+    public   void addUser(String account){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE,30);
         long time=calendar.getTimeInMillis(); // 计算超时时间
@@ -24,27 +27,33 @@ public  class UserPool {
         user.setSessionID(md5);
         userpool.put(account,user);
     }
-    public static  void removeUserBean(String account){
+    public   void removeUserBean(String account){
         userpool.remove(account);
     }
-    public static String getUserSessionID(String account){
+    public  String getUserSessionID(String account){
         UserPoolBean user=userpool.get(account);
         if (user!=null){
             return user.getSessionID();
         }
         return null;
     }
-    public static Boolean checkUser(String account,String sessionID){
+    public  Boolean checkUser(String account,String sessionID){
         UserPoolBean user=userpool.get(account);
         Calendar calendar = Calendar.getInstance();
         long time=calendar.getTimeInMillis(); // 计算超时时间
         if (user!=null){
             if(user.getSessionID().equals(sessionID)&&time<=user.getVaild()){
-                    addUser(account);
-                    return true;
+                calendar.add(Calendar.MINUTE,30);
+                long newtime=calendar.getTimeInMillis(); // 计算超时时间
+                user.setVaild(newtime);
+                return true;
             }
             userpool.remove(account);
         }
         return false;
+    }
+
+    public  Boolean checkUser(IBeanOperation iBeanOperation){
+        return  checkUser(iBeanOperation.getAccount(),iBeanOperation.getSessionID());
     }
 }

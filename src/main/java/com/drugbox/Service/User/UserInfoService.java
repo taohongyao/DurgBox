@@ -17,9 +17,10 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/user")
 public class UserInfoService {
-    private static UserPool userpool=new UserPool();
     @Resource
-    UserInfoDAO dao;
+    private UserPool userpool;
+    @Resource
+    private UserInfoDAO dao;
     @RequestMapping(value="/login.do",method= RequestMethod.POST)
     @ResponseBody
     public OBeanBase userLogin(@RequestBody UserLoginIBean userin){
