@@ -1,9 +1,6 @@
 package com.drugbox.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -16,6 +13,7 @@ public class CommunicationInfo {
     private String communitcateContent;
     private String pictureAttached;
     private Integer communicateZhuan;
+    private UserInfo userInfo;
     private Timestamp  communicateTime;
     @Id
     @Column(name = "Communicate_ID")
@@ -67,6 +65,15 @@ public class CommunicationInfo {
         this.communicateZhuan = communicateZhuan;
     }
 
+    @ManyToOne
+    @JoinColumn(name="User_Name")
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
     @Basic
     @Column(name = "Communicate_Time")
     public Timestamp getCommunicateTime() {

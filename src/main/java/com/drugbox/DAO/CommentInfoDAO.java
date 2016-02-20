@@ -1,8 +1,6 @@
 package com.drugbox.DAO;
 
 import com.drugbox.Entity.CommentInfo;
-import com.drugbox.Entity.CommunicationInfo;
-import com.drugbox.Entity.UserInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +24,7 @@ public class CommentInfoDAO {
     private SessionFactory sessionFactory;
 
     @Transactional(readOnly = false)
-    public void update(UserInfo entity) {
+    public void update(CommentInfo entity) {
         this.getSession().update(entity);
     }
 
@@ -39,16 +37,16 @@ public class CommentInfoDAO {
         return this.sessionFactory.getCurrentSession();
     }
     @Transactional(readOnly = false)
-    public void save(UserInfo entity) {
+    public void save(CommentInfo entity) {
         this.getSession().save(entity);
     }
 
 
-    public UserInfo findById(Serializable id) {
-        return (UserInfo) this.getSession().get(UserInfo.class, id);
+    public CommentInfo findById(Serializable id) {
+        return (CommentInfo) this.getSession().get(CommentInfo.class, id);
     }
 
-    public List<UserInfo> findByHQL(String hql, Object... params) {
+    public List<CommentInfo> findByHQL(String hql, Object... params) {
         Query query = this.getSession().createQuery(hql);
         for (int i = 0; params != null && i < params.length; i++) {
             query.setParameter(i, params);

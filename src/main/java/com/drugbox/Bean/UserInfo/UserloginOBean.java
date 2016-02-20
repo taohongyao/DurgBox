@@ -3,11 +3,11 @@ package com.drugbox.Bean.UserInfo;
 /**
  * Created by 44247 on 2016/2/18 0018.
  */
-public class UserloginOBean {
+public class UserLoginOBean {
     String sessionID;
-    public UserloginOBean() {
+    public UserLoginOBean() {
     }
-    public UserloginOBean(String sessionID) {
+    public UserLoginOBean(String sessionID) {
         this.sessionID = sessionID;
     }
 

@@ -1,9 +1,6 @@
 package com.drugbox.Entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -12,6 +9,8 @@ import java.sql.Timestamp;
 @Entity
 public class RemindInfo {
     private int remindId;
+    private UserInfo userInfo;
+    private MedicineInfo medicineInfo;
     private Timestamp remindTime;
 
     @Id
@@ -34,6 +33,24 @@ public class RemindInfo {
         this.remindTime = remindTime;
     }
 
+    @ManyToOne
+    @JoinColumn(name="User_Name")
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+    @ManyToOne
+    @JoinColumn(name="Medicine_ID")
+    public MedicineInfo getMedicineInfo() {
+        return medicineInfo;
+    }
+
+    public void setMedicineInfo(MedicineInfo medicineInfo) {
+        this.medicineInfo = medicineInfo;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
