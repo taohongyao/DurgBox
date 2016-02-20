@@ -4,9 +4,8 @@ package com.drugbox.Bean;
  * Created by 44247 on 2016/2/18 0018.
  */
 public class IBeanOperation {
-    String account;
-    String sessionID;
-    Object contents;
+    private String account;
+    private String sessionID;
 
     public String getAccount() {
         return account;
@@ -24,11 +23,4 @@ public class IBeanOperation {
         this.sessionID = sessionID;
     }
 
-    public Object getContents() {
-        return contents;
-    }
-
-    public void setContents(Object contents) {
-        this.contents = contents;
-    }
 }

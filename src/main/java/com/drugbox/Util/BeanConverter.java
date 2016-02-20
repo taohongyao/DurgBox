@@ -1,11 +1,13 @@
 package com.drugbox.Util;
 
+import com.drugbox.Bean.CollectionInfo.CollectionInfoOBean;
 import com.drugbox.Bean.CommentInfo.CommentInfoOBean;
 import com.drugbox.Bean.CommunicationInfo.CommunicationOBean;
+import com.drugbox.Bean.MedicineInfo.MedicineInfoOBean;
+import com.drugbox.Bean.PurchaseInfo.PurchaseInfoOBean;
+import com.drugbox.Bean.RemindInfo.RemindInfoOBean;
 import com.drugbox.Bean.UserInfo.UserInfoOBean;
-import com.drugbox.Entity.CommentInfo;
-import com.drugbox.Entity.CommunicationInfo;
-import com.drugbox.Entity.UserInfo;
+import com.drugbox.Entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,16 @@ public class BeanConverter {
         return outlist;
     }
 
+    public static MedicineInfoOBean MedicineInfotoOBean(MedicineInfo medicineInfo){
+        MedicineInfoOBean bean =new MedicineInfoOBean();
+        bean.setMedicineId(medicineInfo.getMedicineId());
+        bean.setMedicineName(medicineInfo.getMedicineName());
+        bean.setMedicinePicture(medicineInfo.getMedicinePicture());
+        bean.setMedicineProduct(medicineInfo.getMedicineProduct());
+        bean.setMedicineSympton(medicineInfo.getMedicineSympton());
+        return bean;
+    }
+
     public static UserInfoOBean UserInfotoInfoOBean(UserInfo userInfo) {
             UserInfoOBean bean = new UserInfoOBean();
             bean.setUserName(userInfo.getUserName());
@@ -69,6 +81,43 @@ public class BeanConverter {
             bean.setUserLastModify(c.getUserLastModify());
             bean.setUserRegisterTime(c.getUserRegisterTime());
             bean.setUserPicture(c.getUserPicture());
+            outlist.add(bean);
+        }
+        return outlist;
+    }
+
+    public static List<CollectionInfoOBean> CollectionInfotoListOBean(List<CollectionInfo> datalist) {
+        List<CollectionInfoOBean> outlist = new ArrayList<CollectionInfoOBean>();
+        for (CollectionInfo c : datalist) {
+            CollectionInfoOBean bean = new CollectionInfoOBean();
+            bean.setCollectionId(c.getCollectionId());
+            bean.setCollectionTime(c.getCollectionTime().toString());
+            bean.setMedicineInfo(MedicineInfotoOBean(c.getMedicineInfo()));
+            outlist.add(bean);
+        }
+        return outlist;
+    }
+
+    public static List<RemindInfoOBean> RemindInfotoListOBean(List<RemindInfo> datalist) {
+        List<RemindInfoOBean> outlist = new ArrayList<RemindInfoOBean>();
+        for (RemindInfo c : datalist) {
+            RemindInfoOBean bean = new RemindInfoOBean();
+            bean.setRemind_ID(c.getRemindId());
+            bean.setRemindTime(c.getRemindTime());
+            bean.setMedicineInfo(MedicineInfotoOBean(c.getMedicineInfo()));
+            outlist.add(bean);
+        }
+        return outlist;
+    }
+
+    public static List<PurchaseInfoOBean> PurchaseInfotoListOBean(List<PurchaseInfo> datalist) {
+        List<PurchaseInfoOBean> outlist = new ArrayList<PurchaseInfoOBean>();
+        for (PurchaseInfo c : datalist) {
+            PurchaseInfoOBean bean = new PurchaseInfoOBean();
+            bean.setMedicineInfo(MedicineInfotoOBean(c.getMedicineInfo()));
+            bean.setPurchaseId(c.getPurchaseId());
+            bean.setPurchaseNum(c.getPurchaseNum());
+            bean.setPurchaseTime(c.getPurchaseTime());
             outlist.add(bean);
         }
         return outlist;
