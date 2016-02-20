@@ -1,9 +1,7 @@
 package com.drugbox.Service;
 
-import com.drugbox.Bean.BeanBase;
-import com.drugbox.Bean.CommentInfo.CommentInfoBean;
+import com.drugbox.Bean.OBeanBase;
 import com.drugbox.DAO.MedicineInfoDAO;
-import com.drugbox.Entity.CommentInfo;
 import com.drugbox.Entity.MedicineInfo;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
@@ -13,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -27,8 +24,8 @@ public class MedicineinfoService {
     MedicineInfoDAO dao;
     @RequestMapping(value="/medicineinfo.do",method= RequestMethod.GET)
     @ResponseBody
-    public BeanBase getMedicineInfo(@RequestParam("id") String id)  {
-        BeanBase carrier =new BeanBase();
+    public OBeanBase getMedicineInfo(@RequestParam("id") String id)  {
+        OBeanBase carrier =new OBeanBase();
         MedicineInfo medicineInfo = dao.findById(id);
         carrier.setContents(medicineInfo);
         if (medicineInfo!=null){
@@ -41,8 +38,8 @@ public class MedicineinfoService {
 
     @RequestMapping(value="/findmedicinelist.do",method= RequestMethod.GET)
     @ResponseBody
-    public BeanBase findMedicineList(@RequestParam("name") String name){
-        BeanBase carrier =new BeanBase();
+    public OBeanBase findMedicineList(@RequestParam("name") String name){
+        OBeanBase carrier =new OBeanBase();
         List<MedicineInfo> outlist = dao.findMedicineListByname(name);
         carrier.setContents(outlist);
         if (outlist.size()!=0){
@@ -55,6 +52,7 @@ public class MedicineinfoService {
 
     @Test
     public void test(){
-
+        Timestamp time =new Timestamp(1455894818000L);
+        System.out.println(time);
     }
 }

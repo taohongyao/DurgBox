@@ -1,9 +1,9 @@
 package com.drugbox.Service.User;
 
-import com.drugbox.Bean.BeanBase;
-import com.drugbox.Bean.OperationBean;
-import com.drugbox.Bean.UserInfo.UserInBean;
-import com.drugbox.Bean.UserInfo.UseroutBean;
+import com.drugbox.Bean.OBeanBase;
+import com.drugbox.Bean.IBeanOperation;
+import com.drugbox.Bean.UserInfo.UserLoginIBean;
+import com.drugbox.Bean.UserInfo.UserLoginOBean;
 import com.drugbox.DAO.UserInfoDAO;
 import com.drugbox.Entity.UserInfo;
 import org.springframework.stereotype.Controller;
@@ -22,11 +22,11 @@ public class UserInfoService {
     UserInfoDAO dao;
     @RequestMapping(value="/login.do",method= RequestMethod.POST)
     @ResponseBody
-    public BeanBase userLogin(@RequestBody UserInBean userin){
+    public OBeanBase userLogin(@RequestBody UserLoginIBean userin){
         String account=userin.getAccount();
         String password=userin.getPassword();
 
-        BeanBase carrier =new BeanBase();
+        OBeanBase carrier =new OBeanBase();
         UserInfo userInfo = dao.findById(account);
         if (userInfo!=null){
             if (userInfo.getUserPassword().equals(password)){
@@ -37,7 +37,7 @@ public class UserInfoService {
                     return carrier;
                 }
                 carrier.setInfo("N01","登录成功");
-                carrier.setContents(new UseroutBean(SessionID));
+                carrier.setContents(new UserLoginOBean(SessionID));
             }else {
                 carrier.setInfo("E02","密码错误");
             }
@@ -48,10 +48,10 @@ public class UserInfoService {
     }
     @RequestMapping(value="/logout.do",method= RequestMethod.POST)
     @ResponseBody
-    public BeanBase userLogout(@RequestBody OperationBean userin){
+    public OBeanBase userLogout(@RequestBody IBeanOperation userin){
         String account=userin.getAccount();
         String sessionID=userin.getSessionID();
-        BeanBase carrier =new BeanBase();
+        OBeanBase carrier =new OBeanBase();
         if (userpool.checkUser(account,sessionID)){
             carrier.setInfo("N01","已退出");
             userpool.removeUserBean(account);
