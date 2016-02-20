@@ -3,7 +3,7 @@ package com.drugbox.Bean;
 /**
  * Created by 44247 on 2016/2/18 0018.
  */
-public class BeanBase {
+public class OBeanBase {
     String code;
     String message;
     Object contents;

@@ -1,6 +1,6 @@
 package com.drugbox.DAO;
 
-import com.drugbox.Entity.MedicineuseInfo;
+import com.drugbox.Entity.CollectionInfo;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,13 +18,13 @@ import java.util.List;
  */
 @Transactional
 @Component
-public class MedicineUseInfoDAO {
+public class CollectionInfoDAO {
     @Autowired
     @Qualifier("sessionFactory")
     private SessionFactory sessionFactory;
 
     @Transactional(readOnly = false)
-    public void update(MedicineuseInfo entity) {
+    public void update(CollectionInfo entity) {
         this.getSession().update(entity);
     }
 
@@ -37,20 +37,32 @@ public class MedicineUseInfoDAO {
         return this.sessionFactory.getCurrentSession();
     }
     @Transactional(readOnly = false)
-    public void save(MedicineuseInfo entity) {
+    public void save(CollectionInfo entity) {
         this.getSession().save(entity);
     }
 
 
-    public MedicineuseInfo findById(Serializable id) {
-        return (MedicineuseInfo) this.getSession().get(MedicineuseInfo.class, id);
+    public CollectionInfo findById(Serializable id) {
+        return (CollectionInfo) this.getSession().get(CollectionInfo.class, id);
     }
 
-    public List<MedicineuseInfo> findByHQL(String hql, Object... params) {
+    public List<CollectionInfo> findByHQL(String hql, Object... params) {
         Query query = this.getSession().createQuery(hql);
         for (int i = 0; params != null && i < params.length; i++) {
             query.setParameter(i, params);
         }
         return query.list();
+    }
+
+    public List<CollectionInfo> getList (String userName) {
+        Query query = this.getSession().createQuery("from CollectionInfo where userInfo.userName = ?");
+        query.setParameter(0,userName);
+        return query.list();
+    }
+    public long getAllCount (String userName) {
+        String hql = "select count(*) from CollectionInfo where userInfo.userName = ?";
+        Query query = this.getSession().createQuery(hql);
+        query.setParameter(0,userName);
+        return ((Long)query.uniqueResult()).intValue();
     }
 }

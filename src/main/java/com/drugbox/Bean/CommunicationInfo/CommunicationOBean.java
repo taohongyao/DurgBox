@@ -1,15 +1,17 @@
 package com.drugbox.Bean.CommunicationInfo;
 
+import com.drugbox.Bean.UserInfo.UserInfoOBean;
+
 /**
  * Created by 44247 on 2016/2/19 0019.
  */
-public class CommunicationBean {
+public class CommunicationOBean {
     private int communicateId;
     private String communicateTopic;
     private String pictureAttached;
     private Integer communicateZhuan;
     private String communicateTime;
-
+    private UserInfoOBean userInfo;
     public int getCommunicateId() {
         return communicateId;
     }
@@ -48,5 +50,13 @@ public class CommunicationBean {
 
     public void setCommunicateTime(String communicateTime) {
         this.communicateTime = communicateTime;
+    }
+
+    public UserInfoOBean getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfoOBean userInfo) {
+        this.userInfo = userInfo;
     }
 }
