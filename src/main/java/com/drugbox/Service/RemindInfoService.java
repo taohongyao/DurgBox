@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,9 +57,7 @@ public class RemindInfoService {
         OBeanBase carrier = new OBeanBase();
         if (userpool.checkUser(iBean)) {
             if(iBean.getList().size()<21){
-                dao.deleteByAccount(iBean.getAccount());
-                List<RemindInfo> list=IBeanConverter.RmindIBeantoEntity(iBean);
-                dao.saveList(list);
+                addbyList(iBean);
                 carrier.setInfo("N01", "上传成功");
             }else {
                 carrier.setInfo("E01", "超出上限20条记录，上传失败");
@@ -66,5 +66,12 @@ public class RemindInfoService {
             carrier.setInfo("E02", "用户验证错误，请重新登陆");
         }
         return carrier;
+    }
+
+    @Transactional(propagation =Propagation.REQUIRED)
+    public void addbyList(RemindInfoIBean iBean){
+        dao.deleteByAccount(iBean.getAccount());
+        List<RemindInfo> list=IBeanConverter.RmindIBeantoEntity(iBean);
+        dao.saveList(list);
     }
 }
