@@ -3,7 +3,7 @@ package com.drugbox.Service;
 import com.drugbox.Bean.OBeanBase;
 import com.drugbox.Bean.CommentInfo.CommentInfoOBean;
 import com.drugbox.DAO.CommentInfoDAO;
-import com.drugbox.Util.BeanConverter;
+import com.drugbox.Util.OBeanConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +31,7 @@ public class CommentInfoService {
         OBeanBase carrier = new OBeanBase();
         int first = start - page * capacity;
 
-        List<CommentInfoOBean> outlist = BeanConverter.CommentInfotoListOBean(dao.getList(communicateID, first, capacity));
+        List<CommentInfoOBean> outlist = OBeanConverter.CommentInfotoListOBean(dao.getList(communicateID, first, capacity));
         carrier.setContents(outlist);
         if (outlist.size() != 0) {
             carrier.setInfo("N01", "查询成功");

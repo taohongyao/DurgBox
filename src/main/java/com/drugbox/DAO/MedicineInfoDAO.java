@@ -68,20 +68,22 @@ public class MedicineInfoDAO {
     @Test
     public void getTitleListTest () {
 
-        Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%太极%");
-        List<MedicineInfo> list=query.list();
-        System.out.println(list.size());
-        for(MedicineInfo m:list){
-            System.out.println(m.getMedicineName());
-        }
-
-        Query query1 = this.getSession().createQuery("from MedicineInfo where medicineId like ?").setParameter(0,"%H44%");
-        List<MedicineInfo> list1=query1.list();
-        System.out.println(list1.size());
-        for(MedicineInfo m:list1){
-            System.out.println(m.getMedicineName());
-        }
-
+//        Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%太极%");
+//        List<MedicineInfo> list=query.list();
+//        System.out.println(list.size());
+//        for(MedicineInfo m:list){
+//            System.out.println(m.getMedicineName());
+//        }
+//
+//        Query query1 = this.getSession().createQuery("from MedicineInfo where medicineId like ?").setParameter(0,"%H44%");
+//        List<MedicineInfo> list1=query1.list();
+//        System.out.println(list1.size());
+//        for(MedicineInfo m:list1){
+//            System.out.println(m.getMedicineName());
+//        }
+        MedicineInfo bean =new MedicineInfo();
+        bean.setMedicineId("fffff");
+        save(bean);
 
 //        String hql = "select count(*) from CommunicationInfo";
 //        Query query2 = this.getSession().createQuery(hql);

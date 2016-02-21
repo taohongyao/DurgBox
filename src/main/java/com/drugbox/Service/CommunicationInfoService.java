@@ -4,7 +4,7 @@ import com.drugbox.Bean.OBeanBase;
 import com.drugbox.Bean.CommunicationInfo.CommunicationOBean;
 import com.drugbox.DAO.CommunicationInfoDAO;
 import com.drugbox.Entity.CommunicationInfo;
-import com.drugbox.Util.BeanConverter;
+import com.drugbox.Util.OBeanConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +43,7 @@ public class CommunicationInfoService {
         OBeanBase carrier =new OBeanBase();
         int first = start-page*capacity;
 
-        List<CommunicationOBean> outlist = BeanConverter.CommunicationtoListOBean(dao.getTitleList(first,capacity));
+        List<CommunicationOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,capacity));
         carrier.setContents(outlist);
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");

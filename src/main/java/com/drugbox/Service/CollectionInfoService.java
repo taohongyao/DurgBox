@@ -4,7 +4,7 @@ import com.drugbox.Bean.CollectionInfo.CollectionInfoOBean;
 import com.drugbox.Bean.OBeanBase;
 import com.drugbox.DAO.CollectionInfoDAO;
 import com.drugbox.Service.User.UserPool;
-import com.drugbox.Util.BeanConverter;
+import com.drugbox.Util.OBeanConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ public class CollectionInfoService {
         OBeanBase carrier = new OBeanBase();
         int first = start - page * capacity;
 
-        List<CollectionInfoOBean> outlist = BeanConverter.CollectionInfotoListOBean(dao.getList(userName, first, capacity));
+        List<CollectionInfoOBean> outlist = OBeanConverter.CollectionInfotoListOBean(dao.getList(userName, first, capacity));
         carrier.setContents(outlist);
         if (outlist.size() != 0) {
             carrier.setInfo("N01", "查询成功");
