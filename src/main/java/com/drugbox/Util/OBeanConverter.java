@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by 44247 on 2016/2/20 0020.
  */
-public class BeanConverter {
+public class OBeanConverter {
 
     public static List<CommunicationOBean> CommunicationtoListOBean(List<CommunicationInfo> datalist){
         List<CommunicationOBean> outlist =new ArrayList<CommunicationOBean>();

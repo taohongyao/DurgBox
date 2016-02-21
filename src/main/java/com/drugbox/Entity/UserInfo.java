@@ -19,7 +19,12 @@ public class UserInfo {
     private String userPossition;
     private Date userRegisterTime;
     private Date userLastModify;
+    public UserInfo(String userName){
+        this.userName=userName;
+    }
+    public UserInfo(){
 
+    }
     @Id
     @Column(name = "User_Name")
     public String getUserName() {

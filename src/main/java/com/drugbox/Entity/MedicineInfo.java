@@ -19,6 +19,13 @@ public class MedicineInfo {
     private String medicineConsume;
     private String medicineQRcode;
 
+    public MedicineInfo() {
+    }
+
+    public MedicineInfo(String medicineId) {
+        this.medicineId = medicineId;
+    }
+
     @Id
     @Column(name = "Medicine_ID")
     public String getMedicineId() {
