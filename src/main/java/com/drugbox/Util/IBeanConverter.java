@@ -5,9 +5,11 @@ import com.drugbox.Bean.CommentInfo.CommentAddIBean;
 import com.drugbox.Bean.PurchaseInfo.PurchaseAddIBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoIBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoIIBean;
+import com.drugbox.Bean.UserInfo.RegisterIBean;
 import com.drugbox.Entity.*;
 import sun.nio.cs.ext.IBM037;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,13 @@ public class IBeanConverter {
         bean.setCommentTime(new Timestamp(time));
         bean.setCommunicationInfo(new CommunicationInfo(IBean.getCommunicateId()));
         bean.setCommentZan(0);
+        return bean;
+    }
+
+    public static UserInfo RegisterIBeantoEntity(RegisterIBean iBean){
+        UserInfo bean=new UserInfo();
+        bean.setUserName(iBean.getAccount());
+        bean.setUserPassword(iBean.getPassword());
         return bean;
     }
 }

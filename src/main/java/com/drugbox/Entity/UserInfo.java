@@ -22,6 +22,12 @@ public class UserInfo {
     public UserInfo(String userName){
         this.userName=userName;
     }
+
+    public UserInfo(String userName, String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
+
     public UserInfo(){
 
     }
