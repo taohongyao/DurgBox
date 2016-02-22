@@ -40,7 +40,13 @@ public class CollectionInfoDAO {
     public void save(CollectionInfo entity) {
         this.getSession().save(entity);
     }
-
+    @Transactional(readOnly = false)
+    public void deleteByActMedid(String account,String medicineId){
+        Query q= this.getSession().createQuery("delete from CollectionInfo where userInfo.userName=? and medicineInfo.medicineId=? ");
+        q.setParameter(0,account);
+        q.setParameter(1,medicineId);
+        q.executeUpdate();
+    }
 
     public CollectionInfo findById(Serializable id) {
         return (CollectionInfo) this.getSession().get(CollectionInfo.class, id);

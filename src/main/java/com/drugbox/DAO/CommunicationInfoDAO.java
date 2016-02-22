@@ -70,19 +70,5 @@ public class CommunicationInfoDAO {
         Query query = this.getSession().createQuery(hql);
         return ((Long)query.uniqueResult()).intValue();
     }
-    @Test
-    public void getTitleListTest () {
-//        Query query = this.getSession().createQuery("from CommunicationInfo ");
-//        query.setFirstResult(1);
-//        query.setMaxResults(5);
-//        List<CommunicationInfo> list=query.list();
-//        System.out.println(list.size());
-//        for(CommunicationInfo c:list){
-//            System.out.println(c.getCommunicateTopic());
-//        }
 
-        String hql = "select count(*) from CommunicationInfo";
-        Query query2 = this.getSession().createQuery(hql);
-        System.out.println(((Long)query2.uniqueResult()).intValue());
-    }
 }

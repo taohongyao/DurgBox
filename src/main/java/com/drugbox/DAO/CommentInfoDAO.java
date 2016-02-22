@@ -40,7 +40,13 @@ public class CommentInfoDAO {
     public void save(CommentInfo entity) {
         this.getSession().save(entity);
     }
-
+    @Transactional(readOnly = false)
+    public void deleteByActComid(String account,int commentId){
+        Query q= this.getSession().createQuery("delete from CommentInfo where userInfo.userName=? and commentId=?");
+        q.setParameter(0,account);
+        q.setParameter(1,commentId);
+        q.executeUpdate();
+    }
 
     public CommentInfo findById(Serializable id) {
         return (CommentInfo) this.getSession().get(CommentInfo.class, id);

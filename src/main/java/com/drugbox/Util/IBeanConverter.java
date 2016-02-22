@@ -1,11 +1,14 @@
 package com.drugbox.Util;
 
+import com.drugbox.Bean.CollectionInfo.CollectionInfoIBean;
+import com.drugbox.Bean.CommentInfo.CommentAddIBean;
+import com.drugbox.Bean.PurchaseInfo.PurchaseAddIBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoIBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoIIBean;
-import com.drugbox.Entity.MedicineInfo;
-import com.drugbox.Entity.RemindInfo;
-import com.drugbox.Entity.UserInfo;
+import com.drugbox.Entity.*;
+import sun.nio.cs.ext.IBM037;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +28,31 @@ public class IBeanConverter {
             ilist.add(bean);
         }
         return ilist;
+    }
+    public static CollectionInfo CollctionIBeantoEntity(CollectionInfoIBean IBean,long time){
+        CollectionInfo bean=new CollectionInfo();
+        bean.setMedicineInfo(new MedicineInfo(IBean.getMedicineId()));
+        bean.setUserInfo(new UserInfo(IBean.getAccount()));
+        bean.setCollectionTime(new Timestamp(time));
+        return bean;
+    }
+
+    public static PurchaseInfo PurchaseAddIBeantoEntity(PurchaseAddIBean IBean, long time){
+        PurchaseInfo bean=new PurchaseInfo();
+        bean.setMedicineInfo(new MedicineInfo(IBean.getMedicineId()));
+        bean.setUserInfo(new UserInfo(IBean.getAccount()));
+        bean.setPurchaseTime(new Timestamp(time));
+        bean.setPurchaseNum(IBean.getPurchaseNum());
+        return bean;
+    }
+
+    public static CommentInfo CommentAddIBeantoEntity(CommentAddIBean IBean, long time){
+        CommentInfo bean=new CommentInfo();
+        bean.setUserInfo(new UserInfo(IBean.getAccount()));
+        bean.setCommentContent(IBean.getCommentContent());
+        bean.setCommentTime(new Timestamp(time));
+        bean.setCommunicationInfo(new CommunicationInfo(IBean.getCommunicateId()));
+        bean.setCommentZan(0);
+        return bean;
     }
 }

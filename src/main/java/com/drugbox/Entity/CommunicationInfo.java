@@ -15,6 +15,14 @@ public class CommunicationInfo {
     private Integer communicateZhuan;
     private UserInfo userInfo;
     private Timestamp  communicateTime;
+
+    public CommunicationInfo(int communicateId) {
+        this.communicateId = communicateId;
+    }
+
+    public CommunicationInfo() {
+    }
+
     @Id
     @Column(name = "Communicate_ID")
     public int getCommunicateId() {
