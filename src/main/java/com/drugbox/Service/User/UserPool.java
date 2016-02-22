@@ -48,7 +48,6 @@ public  class UserPool {
                 user.setVaild(newtime);
                 return true;
             }
-            userpool.remove(account);
         }
         return false;
     }

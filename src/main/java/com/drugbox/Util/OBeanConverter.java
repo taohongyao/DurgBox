@@ -2,6 +2,7 @@ package com.drugbox.Util;
 
 import com.drugbox.Bean.CollectionInfo.CollectionInfoOBean;
 import com.drugbox.Bean.CommentInfo.CommentInfoOBean;
+import com.drugbox.Bean.CommunicationInfo.CommunicationInfoOBean;
 import com.drugbox.Bean.CommunicationInfo.CommunicationOBean;
 import com.drugbox.Bean.MedicineInfo.MedicineInfoOBean;
 import com.drugbox.Bean.PurchaseInfo.PurchaseInfoOBean;
@@ -24,12 +25,40 @@ public class OBeanConverter {
             bean.setCommunicateId(c.getCommunicateId());
             bean.setCommunicateTopic(c.getCommunicateTopic());
             bean.setCommunicateZhuan(c.getCommunicateZhuan());
-            bean.setPictureAttached(c.getPictureAttached());
+            String piclist=c.getPictureAttached();
+            if (piclist!=null){
+                String[] list=piclist.split(",");
+                List<String> olist=new ArrayList<String>();
+                for (int i = 0; i < list.length; i++) {
+                    olist.add(list[i]);
+                }
+                if (list.length!=0) bean.setPictureList(olist);
+            }
             bean.setCommunicateTime(c.getCommunicateTime().toString());
             bean.setUserInfo(UserInfotoInfoOBean(c.getUserInfo()));
             outlist.add(bean);
         }
         return outlist;
+    }
+
+    public static CommunicationInfoOBean CommunicationtoIOBean(CommunicationInfo ibean){
+        CommunicationInfoOBean obean =new CommunicationInfoOBean();
+        obean.setCommunicateId(ibean.getCommunicateId());
+        obean.setCommunicateTopic(ibean.getCommunicateTopic());
+        obean.setCommunicateZhuan(ibean.getCommunicateZhuan());
+        obean.setCommunitcateContent(ibean.getCommunitcateContent());
+        String piclist=ibean.getPictureAttached();
+        if (piclist!=null){
+            String[] list=piclist.split(",");
+            List<String> olist=new ArrayList<String>();
+            for (int i = 0; i < list.length; i++) {
+                olist.add(list[i]);
+            }
+            if (list.length!=0) obean.setPictureList(olist);
+        }
+        obean.setCommunicateTime(ibean.getCommunicateTime().toString());
+        obean.setUserInfo(UserInfotoInfoOBean(ibean.getUserInfo()));
+        return  obean;
     }
 
     public static List<CommentInfoOBean> CommentInfotoListOBean(List<CommentInfo> datalist) {

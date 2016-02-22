@@ -5,7 +5,9 @@ import com.drugbox.Bean.CommentInfo.CommentInfoOBean;
 import com.drugbox.Bean.CommentInfo.CommentZanIBean;
 import com.drugbox.Bean.OBeanBase;
 import com.drugbox.DAO.CommentInfoDAO;
+import com.drugbox.DAO.CommunicationInfoDAO;
 import com.drugbox.Entity.CommentInfo;
+import com.drugbox.Entity.CommunicationInfo;
 import com.drugbox.Service.User.UserPool;
 import com.drugbox.Util.IBeanConverter;
 import com.drugbox.Util.OBeanConverter;
@@ -25,6 +27,8 @@ import java.util.List;
 public class CommentInfoService {
     @Resource
     CommentInfoDAO dao;
+    @Resource
+    CommunicationInfoDAO communicationInfoDAO;
     @Resource
     UserPool userpool;
 
@@ -62,8 +66,12 @@ public class CommentInfoService {
     public OBeanBase addCollection(@RequestBody CommentAddIBean iBean) {
         OBeanBase carrier = new OBeanBase();
         if (userpool.checkUser(iBean)) {
-            dao.save(IBeanConverter.CommentAddIBeantoEntity(iBean, Calendar.getInstance().getTimeInMillis()));
-            carrier.setInfo("N01", "评论成功");
+            if(CommunicationisExsit(iBean.getCommunicateId())){
+                dao.save(IBeanConverter.CommentAddIBeantoEntity(iBean, Calendar.getInstance().getTimeInMillis()));
+                carrier.setInfo("N01", "评论成功");
+            }else {
+                carrier.setInfo("E01", "帖子不存在");
+            }
         } else {
             carrier.setInfo("E02", "用户验证错误，请重新登陆");
         }
@@ -75,8 +83,12 @@ public class CommentInfoService {
     public OBeanBase addZan(@RequestBody CommentZanIBean iBean) {
         OBeanBase carrier = new OBeanBase();
         if (userpool.checkUser(iBean)) {
-            thumb(iBean.getCommentId());
-            carrier.setInfo("N01", "点赞成功");
+            if(CommentisExsit(iBean.getCommentId())){
+                thumb(iBean.getCommentId());
+                carrier.setInfo("N01", "点赞成功");
+            }else {
+                carrier.setInfo("E01", "找不到评论");
+            }
         } else {
             carrier.setInfo("E02", "用户验证错误，请重新登陆");
         }
@@ -88,11 +100,15 @@ public class CommentInfoService {
     public OBeanBase delComment(@RequestBody CommentZanIBean iBean) {
         OBeanBase carrier = new OBeanBase();
         if (userpool.checkUser(iBean)) {
-            if (checkId(iBean)){
-                dao.deleteByActComid(iBean.getAccount(),iBean.getCommentId());
-                carrier.setInfo("N01", "删除评论成功");
-            }else {
-                carrier.setInfo("E01", "没有权限删除他人评论");
+            if (CommentisExsit(iBean.getCommentId())) {
+                if (checkId(iBean)) {
+                    dao.delete(iBean.getCommentId());
+                    carrier.setInfo("N01", "删除评论成功");
+                } else {
+                    carrier.setInfo("E01", "没有权限删除他人评论");
+                }
+            } else {
+                carrier.setInfo("E01", "找不到评论");
             }
         } else {
             carrier.setInfo("E02", "用户验证错误，请重新登陆");
@@ -111,5 +127,13 @@ public class CommentInfoService {
         CommentInfo commentInfo = dao.findById(commentId);
         commentInfo.setCommentZan(commentInfo.getCommentZan() + 1);
         dao.update(commentInfo);
+    }
+    public boolean CommentisExsit(int commentId){
+        CommentInfo bean=dao.findById(commentId);
+        return bean!=null;
+    }
+    public boolean CommunicationisExsit(int communicationId){
+        CommunicationInfo bean=communicationInfoDAO.findById(communicationId);
+        return bean!=null;
     }
 }

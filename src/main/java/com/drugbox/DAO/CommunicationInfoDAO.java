@@ -70,5 +70,20 @@ public class CommunicationInfoDAO {
         Query query = this.getSession().createQuery(hql);
         return ((Long)query.uniqueResult()).intValue();
     }
+    public long getCount (String account,String topic) {
+        String hql = "select count(*) from CommunicationInfo where userInfo.userName=? and communicateTopic=?";
+        Query query = this.getSession().createQuery(hql);
+        query.setParameter(0,account);
+        query.setParameter(1,topic);
+        return ((Long)query.uniqueResult()).intValue();
+    }
 
+    public long getCountExpectbyId (int id,String account,String topic) {
+        String hql = "select count(*) from CommunicationInfo where userInfo.userName=? and communicateTopic=? and communicateId!=?";
+        Query query = this.getSession().createQuery(hql);
+        query.setParameter(0,account);
+        query.setParameter(1,topic);
+        query.setParameter(2,id);
+        return ((Long)query.uniqueResult()).intValue();
+    }
 }

@@ -2,6 +2,7 @@ package com.drugbox.Util;
 
 import com.drugbox.Bean.CollectionInfo.CollectionInfoIBean;
 import com.drugbox.Bean.CommentInfo.CommentAddIBean;
+import com.drugbox.Bean.CommunicationInfo.CommunicationIBean;
 import com.drugbox.Bean.PurchaseInfo.PurchaseAddIBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoIBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoIIBean;
@@ -62,6 +63,26 @@ public class IBeanConverter {
         UserInfo bean=new UserInfo();
         bean.setUserName(iBean.getAccount());
         bean.setUserPassword(iBean.getPassword());
+        return bean;
+    }
+
+    public static CommunicationInfo CommunicationIBeantoEntity(CommunicationIBean iBean){
+        CommunicationInfo bean=new CommunicationInfo();
+        bean.setUserInfo(new UserInfo(iBean.getAccount()));
+        bean.setCommunicateTopic(iBean.getCommunicateTopic());
+        bean.setCommunitcateContent(iBean.getCommunitcateContent());
+        bean.setCommunicateZhuan(0);
+        StringBuffer pic=new StringBuffer();
+        List<String> list =iBean.getPictureAttached();
+        if(list!=null){
+            for(int i=0;i <list.size();i++){
+                String string=list.get(i).trim();
+                if(string.equals("") )continue;
+                pic.append(string);
+                if(i!=list.size()-1) pic.append(",");
+            }
+            if (!pic.toString().equals("")) bean.setPictureAttached(pic.toString());
+        }
         return bean;
     }
 }

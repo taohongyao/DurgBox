@@ -115,6 +115,29 @@ public class UserInfoService {
         return carrier;
     }
 
+    @RequestMapping(value="/updatepwd.do",method= RequestMethod.POST)
+    @ResponseBody
+    public OBeanBase updatePassword(@RequestBody UpPwdIBean iBean){
+        OBeanBase carrier =new OBeanBase();
+        if (userpool.checkUser(iBean)){
+            if(passwordisCorrect(iBean)){
+                updatePwd(iBean);
+                carrier.setInfo("N01","新密码已生效");
+            }else{
+                carrier.setInfo("E01","原密码输入错误");
+            }
+        }else{
+            carrier.setInfo("E02","验证失败，请重新登陆");
+        }
+        return carrier;
+    }
+
+    @Transactional
+    public void updatePwd(UpPwdIBean iBean){
+        UserInfo bean=dao.findById(iBean.getAccount());
+        bean.setUserPassword(iBean.getNewPassword());
+        dao.update(bean);
+    }
     @Transactional
     public void updateInfo(RegisterInfoIBean iBean){
         UserInfo bean=dao.findById(iBean.getAccount());
@@ -123,6 +146,11 @@ public class UserInfoService {
         bean.setUserVirtualName(iBean.getUserVirtualName());
         dao.update(bean);
     }
+    public boolean passwordisCorrect(UpPwdIBean iBean){
+        UserInfo bean=dao.findById(iBean.getAccount());
+        return bean.getUserPassword().equals(iBean.getOldPassword());
+    }
+
     public UserInfoOBean selectUserinfo(String account){
         UserInfo entity=dao.findById(account);
         UserInfoOBean oBean=OBeanConverter.UserInfotoInfoOBean(entity);

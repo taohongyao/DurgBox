@@ -5,15 +5,17 @@ import com.drugbox.Bean.UserInfo.UserInfoOBean;
 import java.util.List;
 
 /**
- * Created by 44247 on 2016/2/19 0019.
+ * Created by 44247 on 2016/2/23 0023.
  */
-public class CommunicationOBean {
+public class CommunicationInfoOBean {
     private int communicateId;
     private String communicateTopic;
+    private String communitcateContent;
     private List<String> pictureList;
     private Integer communicateZhuan;
     private String communicateTime;
     private UserInfoOBean userInfo;
+
     public int getCommunicateId() {
         return communicateId;
     }
@@ -28,6 +30,14 @@ public class CommunicationOBean {
 
     public void setCommunicateTopic(String communicateTopic) {
         this.communicateTopic = communicateTopic;
+    }
+
+    public String getCommunitcateContent() {
+        return communitcateContent;
+    }
+
+    public void setCommunitcateContent(String communitcateContent) {
+        this.communitcateContent = communitcateContent;
     }
 
     public List<String> getPictureList() {
