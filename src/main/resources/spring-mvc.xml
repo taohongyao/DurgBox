@@ -12,6 +12,7 @@
     <mvc:resources location="/RESOURCES/images/Medicine_QRcode/" mapping="/medicine/Medicine_QRcode/**" />
     <mvc:resources location="/RESOURCES/images/Medicine_Picture/" mapping="/medicine/Medicine_Picture/**" />
     <mvc:resources location="/RESOURCES/images/Communication_Picture/" mapping="/forum/Communication_Picture/**" />
+    <mvc:resources location="/RESOURCES/images/User_Pciture/" mapping="/user/User_Pciture/**" />
     <!-- 定义视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
         <property value="/" name="prefix"/>
@@ -33,5 +34,10 @@
                 <value>text/html;charset=UTF-8</value>
             </list>
         </property>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760" />
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 </beans>

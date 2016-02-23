@@ -2,18 +2,23 @@ package com.drugbox.Service;
 
 import com.drugbox.Bean.CommunicationInfo.*;
 import com.drugbox.Bean.OBeanBase;
+import com.drugbox.Bean.Upload.UploadOBean;
 import com.drugbox.DAO.CommentInfoDAO;
 import com.drugbox.DAO.CommunicationInfoDAO;
-import com.drugbox.Entity.CommentInfo;
 import com.drugbox.Entity.CommunicationInfo;
 import com.drugbox.Service.User.UserPool;
 import com.drugbox.Util.IBeanConverter;
 import com.drugbox.Util.OBeanConverter;
+import com.drugbox.Util.UploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -130,6 +135,41 @@ public class CommunicationInfoService {
         }
         return carrier;
     }
+
+
+    @RequestMapping(value="/uploadpic.do",method= RequestMethod.POST)
+    @ResponseBody
+    public OBeanBase uploadUserPic(@RequestParam(value = "file", required = true) MultipartFile file,
+                                   HttpServletRequest request){
+        OBeanBase carrier =new OBeanBase();
+        String account=request.getParameter("account");
+        String sessionId=request.getParameter("sessionId");
+        if(userpool.checkUser(account,sessionId)){
+            if (UploadUtil.isImageByName(file.getOriginalFilename())) {
+                String path = request.getSession().getServletContext().getRealPath("/RESOURCES/images/Communication_Picture");
+                String fileName = new Date().getTime() +"."+ account + ".jpg";
+                File targetFile = new File(path, fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                try {
+                    file.transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    carrier.setInfo("E01", "上传失败，请注意图片不超过10M");
+                    return carrier;
+                }
+                carrier.setInfo("N01", "上传成功");
+                carrier.setContents(new UploadOBean(fileName));
+            } else {
+                carrier.setInfo("E01", "不是图片格式文件");
+            }
+        }else {
+            carrier.setInfo("E02", "用户验证错误，请重新登陆");
+        }
+        return carrier;
+    }
+
     @Transactional
     public void deletCommunicateInfo(CommunicationDeIBean iBean){
         commentInfoDAO.deleteByCommunicationId(iBean.getCommunicateId());
