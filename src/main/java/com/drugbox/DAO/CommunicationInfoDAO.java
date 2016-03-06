@@ -65,6 +65,20 @@ public class CommunicationInfoDAO {
         query.setMaxResults(capacity);
         return query.list();
     }
+
+    public List<CommunicationInfo> getTitleListByUser (int first,int capacity,String user) {
+        Query query = this.getSession().createQuery("from CommunicationInfo where userInfo.userName=?");
+        query.setParameter(0,user);
+        query.setFirstResult(first);
+        query.setMaxResults(capacity);
+        return query.list();
+    }
+
+    public long getAllCountByUser (String user) {
+        Query query = this.getSession().createQuery("select count(*) from CommunicationInfo  where userInfo.userName=?");
+        query.setParameter(0,user);
+        return ((Long)query.uniqueResult()).intValue();
+    }
     public long getAllCount () {
         String hql = "select count(*) from CommunicationInfo ";
         Query query = this.getSession().createQuery(hql);

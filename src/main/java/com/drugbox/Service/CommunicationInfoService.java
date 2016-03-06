@@ -47,6 +47,8 @@ public class CommunicationInfoService {
         }
         return carrier;
     }
+
+
     @RequestMapping(value="/communicationtitlelist.do",method= RequestMethod.GET)
     @ResponseBody
     public OBeanBase getCommunicationTitleList(@RequestParam("start") int start,
@@ -64,6 +66,37 @@ public class CommunicationInfoService {
         }
         return carrier;
     }
+
+    @RequestMapping(value="/communicationtitlelistbyuser.do",method= RequestMethod.GET)
+    @ResponseBody
+    public OBeanBase getCommunicationTitleListByUser(@RequestParam("start") int start,
+                                               @RequestParam("page") int page,
+                                               @RequestParam("capacity") int capacity,
+                                                     @RequestParam("user") String user){
+        OBeanBase carrier =new OBeanBase();
+        int first = start-page*capacity;
+
+        List<CommunicationUOBean> outlist = OBeanConverter.CommunicationtoListUOBean(dao.getTitleListByUser(first,capacity,user));
+        carrier.setContents(outlist);
+        if (outlist.size()!=0){
+            carrier.setInfo("N01","查询成功");
+        }else {
+            carrier.setInfo("E01","查询失败");
+        }
+        return carrier;
+    }
+    @RequestMapping(value="/communicationmaxcountbyuser.do",method= RequestMethod.GET)
+    @ResponseBody
+    public OBeanBase getCommunicationMaxCountByUser(@RequestParam("user") String user){
+        OBeanBase carrier =new OBeanBase();
+        String HQL="from CommunicationInfo where userInfo.userName=?";
+        long count=dao.getAllCountByUser(user);
+        carrier.setContents(count);
+        carrier.setInfo("N01","查询用户总记录数成功");
+        return carrier;
+    }
+
+
     @RequestMapping(value="/communicationmaxcount.do",method= RequestMethod.GET)
     @ResponseBody
     public OBeanBase getCommunicationMaxCount(){

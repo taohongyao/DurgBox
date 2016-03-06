@@ -111,8 +111,17 @@ public class UserInfoService {
     public OBeanBase userLogout(@RequestBody RegisterIBean iBean){
         OBeanBase carrier =new OBeanBase();
         if (checkRegistered(iBean.getAccount())){
-            dao.save(IBeanConverter.RegisterIBeantoEntity(iBean));
-            carrier.setInfo("N01","注册成功");
+            if(iBean.getUserVirtualName()!=null&&iBean.getUserVirtualName().trim()!=""){
+                try{
+                    dao.save(IBeanConverter.RegisterIBeantoEntity(iBean));
+                    carrier.setInfo("N01","注册成功");
+                }catch (Exception e){
+                    carrier.setInfo("E03","含非法字符");
+                    return carrier;
+                }
+            }else {
+                carrier.setInfo("E02","请输入昵称");
+            }
         }else{
             carrier.setInfo("E01","已注册");
         }

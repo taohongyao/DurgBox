@@ -63,6 +63,7 @@ public class IBeanConverter {
         UserInfo bean=new UserInfo();
         bean.setUserName(iBean.getAccount());
         bean.setUserPassword(iBean.getPassword());
+        bean.setUserVirtualName(iBean.getUserVirtualName());
         return bean;
     }
 

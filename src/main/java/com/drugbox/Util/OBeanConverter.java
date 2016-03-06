@@ -4,6 +4,7 @@ import com.drugbox.Bean.CollectionInfo.CollectionInfoOBean;
 import com.drugbox.Bean.CommentInfo.CommentInfoOBean;
 import com.drugbox.Bean.CommunicationInfo.CommunicationInfoOBean;
 import com.drugbox.Bean.CommunicationInfo.CommunicationOBean;
+import com.drugbox.Bean.CommunicationInfo.CommunicationUOBean;
 import com.drugbox.Bean.MedicineInfo.MedicineInfoOBean;
 import com.drugbox.Bean.PurchaseInfo.PurchaseInfoOBean;
 import com.drugbox.Bean.RemindInfo.RemindInfoOBean;
@@ -36,6 +37,27 @@ public class OBeanConverter {
             }
             bean.setCommunicateTime(c.getCommunicateTime().toString());
             bean.setUserInfo(UserInfotoInfoOBean(c.getUserInfo()));
+            outlist.add(bean);
+        }
+        return outlist;
+    }
+    public static List<CommunicationUOBean> CommunicationtoListUOBean(List<CommunicationInfo> datalist){
+        List<CommunicationUOBean> outlist =new ArrayList<CommunicationUOBean>();
+        for(CommunicationInfo c: datalist){
+            CommunicationUOBean bean =new CommunicationUOBean( );
+            bean.setCommunicateId(c.getCommunicateId());
+            bean.setCommunicateTopic(c.getCommunicateTopic());
+            bean.setCommunicateZhuan(c.getCommunicateZhuan());
+            String piclist=c.getPictureAttached();
+            if (piclist!=null){
+                String[] list=piclist.split(",");
+                List<String> olist=new ArrayList<String>();
+                for (int i = 0; i < list.length; i++) {
+                    olist.add(list[i]);
+                }
+                if (list.length!=0) bean.setPictureList(olist);
+            }
+            bean.setCommunicateTime(c.getCommunicateTime().toString());
             outlist.add(bean);
         }
         return outlist;
