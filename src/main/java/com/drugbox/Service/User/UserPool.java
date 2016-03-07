@@ -13,8 +13,7 @@ import java.util.HashMap;
  * Created by 44247 on 2016/2/18 0018.
  */
 @Component
-public  class UserPool {
-    private static HashMap<String,UserPoolBean> userpool=new HashMap<String,UserPoolBean>( );
+public  class UserPool extends HashMap<String,UserPoolBean>{
     public   void addUser(String account){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE,30);
@@ -25,20 +24,20 @@ public  class UserPool {
         user.setAccount(account);
         user.setVaild(time);
         user.setSessionID(md5);
-        userpool.put(account,user);
+        put(account,user);
     }
     public   void removeUserBean(String account){
-        userpool.remove(account);
+        remove(account);
     }
     public  String getUserSessionID(String account){
-        UserPoolBean user=userpool.get(account);
+        UserPoolBean user=get(account);
         if (user!=null){
             return user.getSessionID();
         }
         return null;
     }
     public  Boolean checkUser(String account,String sessionID){
-        UserPoolBean user=userpool.get(account);
+        UserPoolBean user=get(account);
         Calendar calendar = Calendar.getInstance();
         long time=calendar.getTimeInMillis(); // 计算超时时间
         if (user!=null){
