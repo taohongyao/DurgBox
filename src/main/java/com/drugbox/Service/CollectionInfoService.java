@@ -50,7 +50,7 @@ public class CollectionInfoService {
         OBeanBase carrier = new OBeanBase();
         long count = dao.getAllCount(userName);
         carrier.setContents(count);
-        carrier.setInfo("N01", "查询记录总数成功");
+        carrier.setInfo("N01", "查询收藏记录总数成功");
         return carrier;
     }
 
