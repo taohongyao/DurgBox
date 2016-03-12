@@ -116,8 +116,7 @@ public class UserInfoService {
                     dao.save(IBeanConverter.RegisterIBeantoEntity(iBean));
                     carrier.setInfo("N01","注册成功");
                 }catch (Exception e){
-                    carrier.setInfo("E03","数据库写入错误,你输入的信息如下：");
-                    carrier.setContents(iBean);
+                    carrier.setInfo("E03","数据库写入失败");
                     return carrier;
                 }
             }else {

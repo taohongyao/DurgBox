@@ -16,7 +16,7 @@ import java.util.HashMap;
 public  class UserPool extends HashMap<String,UserPoolBean>{
     public   void addUser(String account){
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE,30);
+        calendar.add(Calendar.DAY_OF_MONTH,7);
         long time=calendar.getTimeInMillis(); // 计算超时时间
         String md5=DataEncoder.getMD5("DrugBox"+account+time); //md5加密得到sessionID
 
@@ -42,7 +42,7 @@ public  class UserPool extends HashMap<String,UserPoolBean>{
         long time=calendar.getTimeInMillis(); // 计算超时时间
         if (user!=null){
             if(user.getSessionID().equals(sessionID)&&time<=user.getVaild()){
-                calendar.add(Calendar.MINUTE,30);
+                calendar.add(Calendar.DAY_OF_MONTH,7);
                 long newtime=calendar.getTimeInMillis(); // 计算超时时间
                 user.setVaild(newtime);
                 return true;
