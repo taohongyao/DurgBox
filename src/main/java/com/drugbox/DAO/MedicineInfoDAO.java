@@ -61,7 +61,7 @@ public class MedicineInfoDAO {
         return query.list();
     }
     public List<MedicineInfo> findMedicineListByname (String name) {
-        Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%"+ DataEncoder.encodeStr(name) +"%");
+        Query query = this.getSession().createQuery("from MedicineInfo where medicineName like ?").setParameter(0,"%"+ name +"%");
         return query.list();
     }
 
