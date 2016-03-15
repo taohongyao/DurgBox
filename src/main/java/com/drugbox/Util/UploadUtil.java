@@ -17,6 +17,7 @@ public class UploadUtil {
         fileTypes.add("jpeg");
         fileTypes.add("bmp");
         fileTypes.add("gif");
-        return fileTypes.contains(type);
+        fileTypes.add("png");
+        return fileTypes.contains(type.toLowerCase());
     }
 }
