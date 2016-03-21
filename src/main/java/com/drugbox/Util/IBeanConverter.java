@@ -67,7 +67,7 @@ public class IBeanConverter {
         return bean;
     }
 
-    public static CommunicationInfo CommunicationIBeantoEntity(CommunicationIBean iBean){
+    public static CommunicationInfo CommunicationIBeantoEntity(CommunicationIBean iBean,long time){
         CommunicationInfo bean=new CommunicationInfo();
         bean.setUserInfo(new UserInfo(iBean.getAccount()));
         bean.setCommunicateTopic(iBean.getCommunicateTopic());
@@ -84,6 +84,7 @@ public class IBeanConverter {
             }
             if (!pic.toString().equals("")) bean.setPictureAttached(pic.toString());
         }
+        bean.setCommunicateTime(new Timestamp(time));
         return bean;
     }
 }

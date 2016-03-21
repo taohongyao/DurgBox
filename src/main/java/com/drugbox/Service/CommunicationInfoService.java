@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -113,7 +114,7 @@ public class CommunicationInfoService {
         OBeanBase carrier =new OBeanBase();
         if (userpool.checkUser(iBean)) {
             if(!isRepeat(iBean.getAccount(),iBean.getCommunicateTopic())){
-                dao.save(IBeanConverter.CommunicationIBeantoEntity(iBean));
+                dao.save(IBeanConverter.CommunicationIBeantoEntity(iBean, Calendar.getInstance().getTimeInMillis()));
                 carrier.setInfo("N01","发帖成功");
             }else {
                 carrier.setInfo("E01", "请勿重复发帖");
