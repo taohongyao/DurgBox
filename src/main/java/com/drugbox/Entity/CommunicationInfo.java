@@ -83,7 +83,6 @@ public class CommunicationInfo {
         this.userInfo = userInfo;
     }
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "Communicate_Time")
     public Timestamp getCommunicateTime() {
         return communicateTime;
