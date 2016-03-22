@@ -59,6 +59,7 @@ public class OBeanConverter {
                 }
                 if (list.length!=0) bean.setPictureList(olist);
             }
+            bean.setCommunitcateContent(c.getCommunitcateContent());
             bean.setCommunicateTime(c.getCommunicateTime().toString());
             outlist.add(bean);
         }

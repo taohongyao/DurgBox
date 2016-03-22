@@ -11,8 +11,18 @@ public class CommunicationUOBean {
     private int communicateId;
     private String communicateTopic;
     private List<String> pictureList;
+    private String communitcateContent;
     private Integer communicateZhuan;
     private String communicateTime;
+
+    public String getCommunitcateContent() {
+        return communitcateContent;
+    }
+
+    public void setCommunitcateContent(String communitcateContent) {
+        this.communitcateContent = communitcateContent;
+    }
+
     public int getCommunicateId() {
         return communicateId;
     }
