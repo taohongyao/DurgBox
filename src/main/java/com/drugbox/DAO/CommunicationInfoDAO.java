@@ -74,7 +74,9 @@ public class CommunicationInfoDAO {
         query.setParameter(0,user);
         query.setFirstResult(first);
         query.setMaxResults(capacity);
-        return query.list();
+        List<CommunicationInfo> list=query.list();
+        Collections.reverse(list);
+        return list;
     }
 
     public long getAllCountByUser (String user) {
