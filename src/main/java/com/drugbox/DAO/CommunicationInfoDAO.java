@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -63,7 +64,9 @@ public class CommunicationInfoDAO {
         Query query = this.getSession().createQuery("from CommunicationInfo ");
         query.setFirstResult(first);
         query.setMaxResults(capacity);
-        return query.list();
+        List<CommunicationInfo> result=query.list();
+        Collections.reverse(result);
+        return result;
     }
 
     public List<CommunicationInfo> getTitleListByUser (int first,int capacity,String user) {
