@@ -58,7 +58,7 @@ public class CommunicationInfoService {
         OBeanBase carrier =new OBeanBase();
         int first = start-page*capacity;
 
-        List<CommunicationOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,capacity));
+        List<CommunicationInfoOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,capacity));
         carrier.setContents(outlist);
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");

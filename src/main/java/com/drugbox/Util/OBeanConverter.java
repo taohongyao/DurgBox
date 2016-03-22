@@ -19,10 +19,11 @@ import java.util.List;
  */
 public class OBeanConverter {
 
-    public static List<CommunicationOBean> CommunicationtoListOBean(List<CommunicationInfo> datalist){
-        List<CommunicationOBean> outlist =new ArrayList<CommunicationOBean>();
+    //CommunicationOBean修改为CommunicationInfoOBean 2016.3.22
+    public static List<CommunicationInfoOBean> CommunicationtoListOBean(List<CommunicationInfo> datalist){
+        List<CommunicationInfoOBean> outlist =new ArrayList<CommunicationInfoOBean>();
         for(CommunicationInfo c: datalist){
-            CommunicationOBean bean =new CommunicationOBean( );
+            CommunicationInfoOBean bean =new CommunicationInfoOBean( );
             bean.setCommunicateId(c.getCommunicateId());
             bean.setCommunicateTopic(c.getCommunicateTopic());
             bean.setCommunicateZhuan(c.getCommunicateZhuan());
@@ -37,6 +38,7 @@ public class OBeanConverter {
             }
             bean.setCommunicateTime(c.getCommunicateTime().toString());
             bean.setUserInfo(UserInfotoInfoOBean(c.getUserInfo()));
+            bean.setCommunitcateContent(c.getCommunitcateContent());
             outlist.add(bean);
         }
         return outlist;
