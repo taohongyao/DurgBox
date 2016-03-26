@@ -40,8 +40,11 @@ public class CommentInfoService {
                                     @RequestParam("communicateid") int communicateID) {
         OBeanBase carrier = new OBeanBase();
         int first = start - page * capacity;
-
-        List<CommentInfoOBean> outlist = OBeanConverter.CommentInfotoListOBean(dao.getList(communicateID, first, capacity));
+        int cap=capacity;
+        if(first<0){
+            cap+=first;
+        }
+        List<CommentInfoOBean> outlist = OBeanConverter.CommentInfotoListOBean(dao.getList(communicateID, first, cap));
         carrier.setContents(outlist);
         if (outlist.size() != 0) {
             carrier.setInfo("N01", "查询成功");

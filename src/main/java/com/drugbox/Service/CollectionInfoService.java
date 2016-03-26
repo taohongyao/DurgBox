@@ -34,8 +34,11 @@ public class CollectionInfoService {
                                        @RequestParam("username") String userName) {
         OBeanBase carrier = new OBeanBase();
         int first = start - page * capacity;
-
-        List<CollectionInfoOBean> outlist = OBeanConverter.CollectionInfotoListOBean(dao.getList(userName, first, capacity));
+        int cap=capacity;
+        if(first<0){
+            cap+=first;
+        }
+        List<CollectionInfoOBean> outlist = OBeanConverter.CollectionInfotoListOBean(dao.getList(userName, first, cap));
         carrier.setContents(outlist);
         if (outlist.size() != 0) {
             carrier.setInfo("N01", "查询成功");

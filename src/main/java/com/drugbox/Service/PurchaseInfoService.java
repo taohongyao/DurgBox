@@ -41,7 +41,11 @@ public class PurchaseInfoService {
 
         if (userpool.checkUser(purchaseInfoIBean)) {
             int first = purchaseInfoIBean.getStart() - purchaseInfoIBean.getPage() * purchaseInfoIBean.getCapacity();
-            List<PurchaseInfoOBean> outlist = OBeanConverter.PurchaseInfotoListOBean(dao.getList(purchaseInfoIBean.getAccount(), first, purchaseInfoIBean.getCapacity()));
+            int cap=purchaseInfoIBean.getCapacity();
+            if(first<0){
+                cap+=first;
+            }
+            List<PurchaseInfoOBean> outlist = OBeanConverter.PurchaseInfotoListOBean(dao.getList(purchaseInfoIBean.getAccount(), first, cap));
             carrier.setContents(outlist);
             if (outlist.size() != 0) {
                 carrier.setInfo("N01", "查询成功");

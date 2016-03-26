@@ -57,8 +57,11 @@ public class CommunicationInfoService {
                                                @RequestParam("capacity") int capacity){
         OBeanBase carrier =new OBeanBase();
         int first = start-page*capacity;
-
-        List<CommunicationInfoOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,capacity));
+        int cap=capacity;
+        if(first<0){
+            cap+=first;
+        }
+        List<CommunicationInfoOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,cap));
         carrier.setContents(outlist);
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");
@@ -76,8 +79,11 @@ public class CommunicationInfoService {
                                                      @RequestParam("user") String user){
         OBeanBase carrier =new OBeanBase();
         int first = start-page*capacity;
-
-        List<CommunicationUOBean> outlist = OBeanConverter.CommunicationtoListUOBean(dao.getTitleListByUser(first,capacity,user));
+        int cap=capacity;
+        if(first<0){
+            cap+=first;
+        }
+        List<CommunicationUOBean> outlist = OBeanConverter.CommunicationtoListUOBean(dao.getTitleListByUser(first,cap,user));
         carrier.setContents(outlist);
         if (outlist.size()!=0){
             carrier.setInfo("N01","查询成功");
