@@ -60,6 +60,7 @@ public class CommunicationInfoService {
         int cap=capacity;
         if(first<0){
             cap+=first;
+            first=0;
         }
         List<CommunicationInfoOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,cap));
         carrier.setContents(outlist);
@@ -82,6 +83,7 @@ public class CommunicationInfoService {
         int cap=capacity;
         if(first<0){
             cap+=first;
+            first=0;
         }
         List<CommunicationUOBean> outlist = OBeanConverter.CommunicationtoListUOBean(dao.getTitleListByUser(first,cap,user));
         carrier.setContents(outlist);
