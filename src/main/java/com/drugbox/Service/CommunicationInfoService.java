@@ -62,13 +62,15 @@ public class CommunicationInfoService {
             cap+=first;
             first=0;
         }
-        List<CommunicationInfoOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first,cap));
-        carrier.setContents(outlist);
-        if (outlist.size()!=0){
-            carrier.setInfo("N01","查询成功");
-        }else {
-            carrier.setInfo("E01","查询失败");
-        }
+        if(cap>0) {
+            List<CommunicationInfoOBean> outlist = OBeanConverter.CommunicationtoListOBean(dao.getTitleList(first, cap));
+            carrier.setContents(outlist);
+            if (outlist.size() != 0) {
+                carrier.setInfo("N01", "查询成功");
+            } else {
+                carrier.setInfo("E01", "查询失败");
+            }
+        }else carrier.setInfo("E02","超出查询范围");
         return carrier;
     }
 
@@ -85,12 +87,16 @@ public class CommunicationInfoService {
             cap+=first;
             first=0;
         }
-        List<CommunicationUOBean> outlist = OBeanConverter.CommunicationtoListUOBean(dao.getTitleListByUser(first,cap,user));
-        carrier.setContents(outlist);
-        if (outlist.size()!=0){
-            carrier.setInfo("N01","查询成功");
+        if(cap>0) {
+            List<CommunicationUOBean> outlist = OBeanConverter.CommunicationtoListUOBean(dao.getTitleListByUser(first,cap,user));
+            carrier.setContents(outlist);
+            if (outlist.size()!=0){
+                carrier.setInfo("N01","查询成功");
+            }else {
+                carrier.setInfo("E01","查询失败");
+            }
         }else {
-            carrier.setInfo("E01","查询失败");
+            carrier.setInfo("E02","超出查询范围");
         }
         return carrier;
     }
